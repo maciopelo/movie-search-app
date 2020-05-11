@@ -14,7 +14,10 @@ const Results = (props) => {
     <section className="results">
       {results}
       {props.isModal && (
-        <Modal modalInfo={props.modalInfo} handleModal={props.handleModal} />
+        <Modal
+          clickedModalInfo={props.clickedModalInfo}
+          handleModal={props.handleModal}
+        />
       )}
     </section>
   );

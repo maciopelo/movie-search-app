@@ -11,12 +11,17 @@ class App extends Component {
     currentTitle: "",
     results: [],
     loaded: false,
-    modalInfo: [],
+    modalsInfo: [],
+    clickedModalInfo: [],
     isModal: false,
   };
 
   handleClearPage = () => {
-    this.setState((prevState) => ({ loaded: !prevState.loaded }));
+    this.setState((prevState) => ({
+      results: [],
+      modalsInfo: [],
+      loaded: false,
+    }));
   };
 
   handleInputChange = (e) => {
@@ -35,7 +40,7 @@ class App extends Component {
                 .then((resposne) => resposne.json())
                 .then((data) => {
                   return this.setState((prevState) => ({
-                    modalInfo: [...prevState.modalInfo, data],
+                    modalsInfo: [...prevState.modalsInfo, data],
                   }));
                 });
             });
@@ -52,13 +57,13 @@ class App extends Component {
   };
 
   handleModal = (id) => {
-    if (!this.state.isModal) {
-      fetch(`${API_URL}?i=${id}${API_KEY}`)
-        .then((resposne) => resposne.json())
-        .then((data) => this.setState({ modalInfo: data }));
-    }
-
-    this.setState((prevState) => ({ isModal: !prevState.isModal }));
+    const clickedModal = this.state.modalsInfo.filter(
+      (item) => item.imdbID === id
+    );
+    this.setState((prevState) => ({
+      clickedModalInfo: clickedModal,
+      isModal: !prevState.isModal,
+    }));
   };
 
   render() {
@@ -77,7 +82,7 @@ class App extends Component {
               results={this.state.results}
               handleModal={this.handleModal}
               isModal={this.state.isModal}
-              modalInfo={this.state.modalInfo}
+              clickedModalInfo={this.state.clickedModalInfo}
             />
           )}
         </main>
