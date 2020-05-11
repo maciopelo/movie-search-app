@@ -10,6 +10,7 @@ body {
 
 header {
   padding: 40px 15px;
+  cursor: pointer;
 }
 
 header h1 {
@@ -171,6 +172,8 @@ main {
 @media (max-width: 900px) {
   .modal-content {
     font-size: 14px;
+    background-color: #fff;
+    margin: 10px;
   }
 }
 
@@ -182,7 +185,7 @@ main {
 
   .fa,
   .fa-times {
-    color: #223343;
+    color: #222;
   }
 
   .modal-poster {
